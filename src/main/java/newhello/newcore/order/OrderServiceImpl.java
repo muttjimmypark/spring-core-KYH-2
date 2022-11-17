@@ -30,12 +30,21 @@ public class OrderServiceImpl implements OrderService {
 //        //조회할 타입의 bean이 여러개면, 필드명을 통해 특정할 수 있다
 //    }
 
+//    @Autowired
+//    public OrderServiceImpl(MemberRepository memberRepository, @Qualifier("mainDiscountPolicy") DiscountPolicy discountPolicy) {
+//        this.memberRepository = memberRepository;
+//        this.discountPolicy = discountPolicy;
+//
+//        //Qualifier라는 애노테이션으로 주입할 정책을 구분할수 있다
+//    }
+
     @Autowired
-    public OrderServiceImpl(MemberRepository memberRepository, @Qualifier("mainDiscountPolicy") DiscountPolicy discountPolicy) {
+    public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
         this.memberRepository = memberRepository;
         this.discountPolicy = discountPolicy;
 
-        //Qualifier라는 애노테이션으로 주입할 정책을 구분할수 있다
+        //구현체중에 @Primary 애노테이션 붙은걸 우선 주입 : 제일 많이 쓰임
+        // 우선권은 @Qualifier가 @Primary 보다 앞선다.
     }
 
     /**
