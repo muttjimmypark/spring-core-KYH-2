@@ -8,13 +8,13 @@ group = 'newhello'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '11'
 
-//lombok 설정 추가 시작
-configurations {
-    compileOnly {
-        extendsFrom annotationProcessor
-    }
-}
-//lombok 설정 추가 끝
+////lombok 설정 추가 시작
+//configurations {
+//    compileOnly {
+//        extendsFrom annotationProcessor
+//    }
+//}
+////lombok 설정 추가 끝
 
 repositories {
     mavenCentral()

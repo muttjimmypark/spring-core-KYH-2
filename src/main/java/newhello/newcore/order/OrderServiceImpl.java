@@ -1,6 +1,7 @@
 package newhello.newcore.order;
 
 import lombok.RequiredArgsConstructor;
+import newhello.newcore.annotation.MainDiscountPolicy;
 import newhello.newcore.discount.DiscountPolicy;
 import newhello.newcore.discount.FixDiscountPolicy;
 import newhello.newcore.discount.RateDiscountPolicy;
@@ -38,13 +39,22 @@ public class OrderServiceImpl implements OrderService {
 //        //Qualifier라는 애노테이션으로 주입할 정책을 구분할수 있다
 //    }
 
+//    @Autowired
+//    public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
+//        this.memberRepository = memberRepository;
+//        this.discountPolicy = discountPolicy;
+//
+//        //구현체중에 @Primary 애노테이션 붙은걸 우선 주입 : 제일 많이 쓰임
+//        // 우선권은 @Qualifier가 @Primary 보다 앞선다.
+//    }
+
     @Autowired
-    public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
+    public OrderServiceImpl(MemberRepository memberRepository, @MainDiscountPolicy DiscountPolicy discountPolicy) {
         this.memberRepository = memberRepository;
         this.discountPolicy = discountPolicy;
 
-        //구현체중에 @Primary 애노테이션 붙은걸 우선 주입 : 제일 많이 쓰임
-        // 우선권은 @Qualifier가 @Primary 보다 앞선다.
+        //@Qualifier를 사용하면 파라미터가 String이므로 컴파일단에서 오타를 파악할수 없음
+        //애노테이션을 직접 만듬으로 해결할수 있다
     }
 
     /**
