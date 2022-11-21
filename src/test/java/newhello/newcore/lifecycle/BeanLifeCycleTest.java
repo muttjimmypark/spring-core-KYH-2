@@ -17,7 +17,10 @@ public class BeanLifeCycleTest {
 
     @Configuration
     static class LifeCycleConfig {
-        @Bean
+
+        //        @Bean 콜백 방법2 적용전
+//        @Bean(initMethod = "init", destroyMethod = "close") before inffered
+        @Bean(initMethod = "init")
         public NetworkClient networkClient() {
             NetworkClient networkClient = new NetworkClient();
             networkClient.setUrl("https://hello.dev");
