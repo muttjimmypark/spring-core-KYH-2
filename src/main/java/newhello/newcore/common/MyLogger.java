@@ -1,6 +1,7 @@
 package newhello.newcore.common;
 
 import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
@@ -8,7 +9,13 @@ import javax.annotation.PreDestroy;
 import java.util.UUID;
 
 @Component
-@Scope("request")
+//@Scope("request")
+/**
+ * 프록시 객체를 생성시켜놓으니 컨트롤러에 이걸 주입시켜서 일단 bean이 생성되게 하고,
+ * 실제 객체가 생성되는 시점에 CGLIB(바이트코드 조작 라이브러리)에서 바꿔치기(위임)를 해준다
+ * Provider 대비, 리퀘스트스코프 자신에만 적용해놓으면 된다는 큰 장점이 있다
+ */
+@Scope(value = "request", proxyMode = ScopedProxyMode.TARGET_CLASS)
 public class MyLogger {
 
     /**
